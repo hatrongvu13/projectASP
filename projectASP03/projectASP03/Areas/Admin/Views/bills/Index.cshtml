@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Models.Entity.bill>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.amountOfPeople)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.child)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.payment)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paystatus)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.confirm)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.customer.email)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.amountOfPeople)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.child)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.payment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paystatus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.confirm)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.customer.email)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

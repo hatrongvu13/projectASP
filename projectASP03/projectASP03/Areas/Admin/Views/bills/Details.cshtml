@@ -1,0 +1,67 @@
+﻿@model Models.Entity.bill
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>bill</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.amountOfPeople)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amountOfPeople)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.child)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.child)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.payment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.payment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paystatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paystatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.confirm)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.confirm)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.customer.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.customer.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,179 @@
+﻿@model Models.Entity.tour
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Header -->
+@{
+    Html.RenderPartial("_PartialHeader");
+}
+<!-- End Header -->
+<!--Banner-->
+<section class="sub-banner">
+    <!--Background-->
+    <div class="bg-parallax bg-1"></div>
+    <!--End Background-->
+    <!-- Logo -->
+    <div class="logo-banner text-center">
+        <a href="#" title="">
+            <img src="~/Content/UI/images/logo-banner.png" alt="">
+        </a>
+    </div>
+    <!-- Logo -->
+
+</section>
+<!--End Banner-->
+<!-- Main -->
+<div class="main main-dt">
+    <div class="container">
+        <div class="main-cn detail-page bg-white clearfix">
+
+            <!-- Breakcrumb -->
+            <section class="breakcrumb-sc">
+                @*<ul class="breadcrumb arrow">
+                        <li><a href="index-2.html"><i class="fa fa-home"></i></a></li>
+                        <li><a href="hotel.html" title="">Hotels</a></li>
+                        <li><a href="#" title="">Europe </a></li>
+                        <li>Netherlands</li>
+                    </ul>*@
+                <div class="support float-right">
+                    <small>Bạn có thắc mắc ? Liên hệ: </small> 0943-561-685
+                </div>
+            </section>
+            <!-- End Breakcrumb -->
+            <!-- Header Detail -->
+            <section class="head-detail">
+                <div class="head-dt-cn">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <h1>@ViewBag.totalDay Ngày, Tham quan du lịch tại @Model.vacation.name !</h1>
+                        </div>
+                        <div class="col-sm-5 text-right">
+                            <p class="price-book">
+                                Từ-<span>@ViewBag.price</span>/người/tour
+                                <a href="@Url.Action("Index","Tour",new { id=Model.tourID })" title="" class="awe-btn awe-btn-1 awe-btn-lager">Đặt ngay</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Header Detail -->
+            <!-- Detail Slide -->
+            <section class="detail-slider">
+
+                <div class="slide-room-lg">
+                    <div id="slide-room-lg">
+                        @foreach (var item in ViewBag.TourImg as IEnumerable<Models.Entity.tourImg>)
+                        {
+                            <img src="~/Content/UI/images/tour/slide/@item.link" alt="">
+                        }
+                    </div>
+                </div>
+                <!-- End Lager Image -->
+                <!-- Thumnail Image -->
+                <div class="slide-room-sm">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div id="slide-room-sm">
+                                @foreach (var item in ViewBag.TourImg as IEnumerable<Models.Entity.tourImg>)
+                                {
+                                    <img src="~/Content/UI/images/cruise/slide/@item.link" alt="">
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Thumnail Image -->
+
+            </section>
+            <!-- End Detail Slide -->
+            <!-- Tour Overview -->
+            <section class="tour-overview detail-cn" id="tour-overview">
+                <div class="row">
+                    @*<div class="col-lg-3 detail-sidebar">
+                        <div class="scroll-heading">
+                            <h2>overview</h2>
+                            <hr class="hr">
+                            <a href="#optional-acitivites" title="">Optional activities</a>
+                            <a href="#accomodation" title="">accomodation</a>
+                            <a href="#tour-meals" title="">Meals</a>
+                            <a href="#tour-necessary">No Tip Necessary</a>
+                        </div>
+                    </div>*@
+
+                    <!-- Tour Overview Content -->
+                    <div class="col-lg-9 tour-overview-cn">
+
+                         @*Description 
+                        <div class="tour-description">
+                            <h2 class="title-detail">
+                               Mô tả Tour: 
+                            </h2>
+                            <div class="tour-detail-text">
+                                <p>
+                                    Visiting 5 countries: Spain, France, Monaco, Switzerland, Italy<br>
+                                    Make sure you keep your camera batteries charged, as they'll be getting some serious use as you travel Europe on our Paparazzi Parade. We'll be snapping away at the spectacular architecture of Barcelona, supercars in Monaco, mountain resorts in Switzerland and exquisite Renaissance statues in Florence; by the time we reach Rome you'll have memory card full of amazing pics and a scrapbook bursting with memories. Fabulous darling!
+                                </p>
+                            </div>
+                        </div>*@
+                        <!-- End Description -->
+
+                        <div class="tour-itinerary">
+                            <h2 class="title-detail">Itinerary</h2>
+                            <!-- Accordion -->
+                            <div class="panel-group no-margin" id="accordion">
+                                @foreach (var item in ViewBag.TourDetail as IEnumerable<Models.Entity.descriptionTour>)
+                                {
+                                    <!-- Accordion 1 -->
+                                    <div class="panel">
+                                        <div class="panel-heading" id="headingOne">
+                                            <h4 class="panel-title">
+                                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                    <small>@item.title:</small>
+                                                    <span class="icon fa fa-angle-down"></span>
+                                                </a>
+                                            </h4>
+
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" aria-labelledby="headingOne">
+                                            <div class="panel-body">
+                                                @item.content
+                                                @*This stateroom features two convertible lower beds, floor-to-ceiling sliding glass doors, private veranda, sitting area (some with sofa bed), refrigerator, 20" multifunction interactive television, direct-dial telephone and voicemail, individual safe, hair dryer, thermostat-controlled air-conditioning, mini-bar, bathroom with bathtub and/or shower, complimentary use of bathrobes, and 24-hour room service.*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Accordion 1 -->
+                                }
+
+
+                            </div>
+                            <!-- Accordion -->
+                        </div>
+                    </div>
+                    <!-- End Tour Overview Content -->
+
+                </div>
+            </section>
+            <!-- End Tour Overview -->
+
+            
+            
+            
+
+            <section class="detail-footer tour-detail-footer detail-cn">
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-9 detail-footer-cn text-right">
+                        <p class="price-book">
+                            From-<span>$345</span>/night
+                            <a href="@Url.Action("Index","Tour",new { id=Model.tourID })" title="" class="awe-btn awe-btn-1 awe-btn-lager">Book Now</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</div>
+<!-- End Main -->
+<!-- Footer -->

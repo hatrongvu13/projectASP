@@ -1,0 +1,53 @@
+﻿@model Models.Models.SearchModels
+<section class="banner">
+    <!--Background-->
+    <div class="bg-parallax bg-1"></div>
+    <!--End Background-->
+    <div class="container">
+        <!-- Banner Content -->
+        <div class="banner-cn">
+            <!-- Logo -->
+            <div class="logo-banner text-center">
+                <a href="#" title="">
+                    <img src="~/Content/UI/images/logo-banner.png" alt="">
+                </a>
+            </div>
+            <!-- Logo -->
+            <!-- Category Singer -->
+            <div class="category-singer clearfix">
+                <div class="cate-singer-icon float-left">
+                    <h2>Tìm kiếm</h2>
+                    <img src="~/Content/UI/images/icon-vacation.png" alt="">
+                </div>
+                <p>Có hơn <span>150,000</span> tour và địa điểm cho bạn lựa chọn</p>
+            </div>
+            <!-- End Category Singer -->
+            <!-- Form Search -->
+            <div class="form-cn form-tour">
+                <h2>Bạn muốn đi đâu ?</h2>
+                @using (Html.BeginForm("Search","Home",FormMethod.Get))
+                {
+                    <div class="form-search clearfix">
+                        <div class="form-field field-destination">
+                            <label for="destination"><span>Địa điểm:</span> Hà Nội, Quảng Ninh, ...</label>
+                            @Html.TextBoxFor(model=>model.Tour, new { @type="text", @id= "destination", @class = "field-input" })
+                            @*<input type="text" id="destination" class="field-input">*@
+                        </div>
+                        <div class="form-field field-destination">
+                            <label for="people"><span>Số người:</span> 1 người , 2 người , 3 người </label>
+                            @Html.TextBoxFor(model => model.People, new { @type = "text", @id = "people", @class = "field-input" })
+                            @*<input type="text" id="people" class="field-input">*@
+                        </div>
+                        
+                        <div class="form-submit">
+                            <button id="Search_btn" type="submit" class="awe-btn awe-btn-medium awe-search">Search</button>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- End Form Search -->
+        </div>
+        <!-- End Banner Content -->
+    </div>
+
+</section>

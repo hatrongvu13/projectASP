@@ -1,0 +1,656 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="projectASP01Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="accountID" />
+          </Key>
+          <Property Name="accountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="username" Type="nvarchar" MaxLength="255" />
+          <Property Name="password" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="billDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idBill" Type="int" />
+          <Property Name="tourID" Type="int" />
+          <Property Name="pay" Type="int" />
+          <Property Name="start" Type="date" />
+          <Property Name="finish" Type="date" />
+        </EntityType>
+        <EntityType Name="bills">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="customerID" Type="int" />
+          <Property Name="amountOfPeople" Type="int" />
+          <Property Name="child" Type="int" />
+          <Property Name="payment" Type="nvarchar" MaxLength="255" />
+          <Property Name="paystatus" Type="bit" />
+          <Property Name="confirm" Type="bit" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="255" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="255" />
+          <Property Name="phoneNumber" Type="varchar" MaxLength="255" />
+          <Property Name="created_at" Type="datetime" />
+        </EntityType>
+        <EntityType Name="descriptionTour">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tourID" Type="int" />
+          <Property Name="title" Type="nvarchar" MaxLength="255" />
+          <Property Name="content" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="province">
+          <Key>
+            <PropertyRef Name="provinceID" />
+          </Key>
+          <Property Name="provinceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'projectASP01.dbo.statusWeb' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="statusWeb">
+          <Property Name="status" Type="bit" />
+        </EntityType>-->
+        <EntityType Name="tour">
+          <Key>
+            <PropertyRef Name="tourID" />
+          </Key>
+          <Property Name="tourID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="vacationID" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+          <Property Name="start" Type="date" />
+          <Property Name="finish" Type="date" />
+          <Property Name="status" Type="bit" />
+          <Property Name="unit" Type="int" />
+          <Property Name="sales" Type="int" />
+        </EntityType>
+        <EntityType Name="tourDetails">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tourID" Type="int" />
+          <Property Name="transport" Type="bit" />
+          <Property Name="hotel" Type="bit" />
+          <Property Name="amountOfPeople" Type="int" />
+          <Property Name="childUnit" Type="int" />
+          <Property Name="childAge" Type="int" />
+        </EntityType>
+        <EntityType Name="tourImg">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tourID" Type="int" />
+          <Property Name="link" Type="nvarchar" MaxLength="255" />
+          <Property Name="main" Type="bit" />
+        </EntityType>
+        <EntityType Name="vacation">
+          <Key>
+            <PropertyRef Name="vacationID" />
+          </Key>
+          <Property Name="vacationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="provinceID" Type="int" />
+          <Property Name="name" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <Association Name="FK__billDetai__idBil__286302EC">
+          <End Role="bills" Type="Self.bills" Multiplicity="0..1" />
+          <End Role="billDetails" Type="Self.billDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="billDetails">
+              <PropertyRef Name="idBill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__billDetai__tourI__29572725">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="billDetails" Type="Self.billDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourID" />
+            </Principal>
+            <Dependent Role="billDetails">
+              <PropertyRef Name="tourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__bills__customerI__25869641">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="bills" Type="Self.bills" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="bills">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__descripti__tourI__1CF15040">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="descriptionTour" Type="Self.descriptionTour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourID" />
+            </Principal>
+            <Dependent Role="descriptionTour">
+              <PropertyRef Name="tourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tour__vacationID__1A14E395">
+          <End Role="vacation" Type="Self.vacation" Multiplicity="0..1" />
+          <End Role="tour" Type="Self.tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vacation">
+              <PropertyRef Name="vacationID" />
+            </Principal>
+            <Dependent Role="tour">
+              <PropertyRef Name="vacationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourDetai__tourI__22AA2996">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="tourDetails" Type="Self.tourDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourID" />
+            </Principal>
+            <Dependent Role="tourDetails">
+              <PropertyRef Name="tourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourImg__tourID__1FCDBCEB">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="tourImg" Type="Self.tourImg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourID" />
+            </Principal>
+            <Dependent Role="tourImg">
+              <PropertyRef Name="tourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vacation__provin__173876EA">
+          <End Role="province" Type="Self.province" Multiplicity="0..1" />
+          <End Role="vacation" Type="Self.vacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="province">
+              <PropertyRef Name="provinceID" />
+            </Principal>
+            <Dependent Role="vacation">
+              <PropertyRef Name="provinceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projectASP01ModelStoreContainer">
+          <EntitySet Name="account" EntityType="Self.account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="billDetails" EntityType="Self.billDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="bills" EntityType="Self.bills" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="customer" EntityType="Self.customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="descriptionTour" EntityType="Self.descriptionTour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="province" EntityType="Self.province" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tour" EntityType="Self.tour" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tourDetails" EntityType="Self.tourDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tourImg" EntityType="Self.tourImg" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vacation" EntityType="Self.vacation" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__billDetai__idBil__286302EC" Association="Self.FK__billDetai__idBil__286302EC">
+            <End Role="bills" EntitySet="bills" />
+            <End Role="billDetails" EntitySet="billDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__billDetai__tourI__29572725" Association="Self.FK__billDetai__tourI__29572725">
+            <End Role="tour" EntitySet="tour" />
+            <End Role="billDetails" EntitySet="billDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__bills__customerI__25869641" Association="Self.FK__bills__customerI__25869641">
+            <End Role="customer" EntitySet="customer" />
+            <End Role="bills" EntitySet="bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__descripti__tourI__1CF15040" Association="Self.FK__descripti__tourI__1CF15040">
+            <End Role="tour" EntitySet="tour" />
+            <End Role="descriptionTour" EntitySet="descriptionTour" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tour__vacationID__1A14E395" Association="Self.FK__tour__vacationID__1A14E395">
+            <End Role="vacation" EntitySet="vacation" />
+            <End Role="tour" EntitySet="tour" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourDetai__tourI__22AA2996" Association="Self.FK__tourDetai__tourI__22AA2996">
+            <End Role="tour" EntitySet="tour" />
+            <End Role="tourDetails" EntitySet="tourDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourImg__tourID__1FCDBCEB" Association="Self.FK__tourImg__tourID__1FCDBCEB">
+            <End Role="tour" EntitySet="tour" />
+            <End Role="tourImg" EntitySet="tourImg" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vacation__provin__173876EA" Association="Self.FK__vacation__provin__173876EA">
+            <End Role="province" EntitySet="province" />
+            <End Role="vacation" EntitySet="vacation" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="projectASP01Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="account">
+          <Key>
+            <PropertyRef Name="accountID" />
+          </Key>
+          <Property Name="accountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="billDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idBill" Type="Int32" />
+          <Property Name="tourID" Type="Int32" />
+          <Property Name="pay" Type="Int32" />
+          <Property Name="start" Type="DateTime" Precision="0" />
+          <Property Name="finish" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="bill" Relationship="Self.FK__billDetai__idBil__286302EC" FromRole="billDetails" ToRole="bills" />
+          <NavigationProperty Name="tour" Relationship="Self.FK__billDetai__tourI__29572725" FromRole="billDetails" ToRole="tour" />
+        </EntityType>
+        <EntityType Name="bill">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="customerID" Type="Int32" />
+          <Property Name="amountOfPeople" Type="Int32" />
+          <Property Name="child" Type="Int32" />
+          <Property Name="payment" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="paystatus" Type="Boolean" />
+          <Property Name="confirm" Type="Boolean" />
+          <NavigationProperty Name="billDetails" Relationship="Self.FK__billDetai__idBil__286302EC" FromRole="bills" ToRole="billDetails" />
+          <NavigationProperty Name="customer" Relationship="Self.FK__bills__customerI__25869641" FromRole="bills" ToRole="customer" />
+        </EntityType>
+        <EntityType Name="customer">
+          <Key>
+            <PropertyRef Name="customerID" />
+          </Key>
+          <Property Name="customerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="firstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="lastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="phoneNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="created_at" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="bills" Relationship="Self.FK__bills__customerI__25869641" FromRole="customer" ToRole="bills" />
+        </EntityType>
+        <EntityType Name="descriptionTour">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tourID" Type="Int32" />
+          <Property Name="title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="tour" Relationship="Self.FK__descripti__tourI__1CF15040" FromRole="descriptionTour" ToRole="tour" />
+        </EntityType>
+        <EntityType Name="province">
+          <Key>
+            <PropertyRef Name="provinceID" />
+          </Key>
+          <Property Name="provinceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="vacations" Relationship="Self.FK__vacation__provin__173876EA" FromRole="province" ToRole="vacation" />
+        </EntityType>
+        <EntityType Name="tour">
+          <Key>
+            <PropertyRef Name="tourID" />
+          </Key>
+          <Property Name="tourID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="vacationID" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="start" Type="DateTime" Precision="0" />
+          <Property Name="finish" Type="DateTime" Precision="0" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="unit" Type="Int32" />
+          <Property Name="sales" Type="Int32" />
+          <NavigationProperty Name="billDetails" Relationship="Self.FK__billDetai__tourI__29572725" FromRole="tour" ToRole="billDetails" />
+          <NavigationProperty Name="descriptionTours" Relationship="Self.FK__descripti__tourI__1CF15040" FromRole="tour" ToRole="descriptionTour" />
+          <NavigationProperty Name="vacation" Relationship="Self.FK__tour__vacationID__1A14E395" FromRole="tour" ToRole="vacation" />
+          <NavigationProperty Name="tourDetails" Relationship="Self.FK__tourDetai__tourI__22AA2996" FromRole="tour" ToRole="tourDetails" />
+          <NavigationProperty Name="tourImgs" Relationship="Self.FK__tourImg__tourID__1FCDBCEB" FromRole="tour" ToRole="tourImg" />
+        </EntityType>
+        <EntityType Name="tourDetail">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tourID" Type="Int32" />
+          <Property Name="transport" Type="Boolean" />
+          <Property Name="hotel" Type="Boolean" />
+          <Property Name="amountOfPeople" Type="Int32" />
+          <Property Name="childUnit" Type="Int32" />
+          <Property Name="childAge" Type="Int32" />
+          <NavigationProperty Name="tour" Relationship="Self.FK__tourDetai__tourI__22AA2996" FromRole="tourDetails" ToRole="tour" />
+        </EntityType>
+        <EntityType Name="tourImg">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tourID" Type="Int32" />
+          <Property Name="link" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="main" Type="Boolean" />
+          <NavigationProperty Name="tour" Relationship="Self.FK__tourImg__tourID__1FCDBCEB" FromRole="tourImg" ToRole="tour" />
+        </EntityType>
+        <EntityType Name="vacation">
+          <Key>
+            <PropertyRef Name="vacationID" />
+          </Key>
+          <Property Name="vacationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="provinceID" Type="Int32" />
+          <Property Name="name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="province" Relationship="Self.FK__vacation__provin__173876EA" FromRole="vacation" ToRole="province" />
+          <NavigationProperty Name="tours" Relationship="Self.FK__tour__vacationID__1A14E395" FromRole="vacation" ToRole="tour" />
+        </EntityType>
+        <Association Name="FK__billDetai__idBil__286302EC">
+          <End Role="bills" Type="Self.bill" Multiplicity="0..1" />
+          <End Role="billDetails" Type="Self.billDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bills">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="billDetails">
+              <PropertyRef Name="idBill" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__billDetai__tourI__29572725">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="billDetails" Type="Self.billDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourID" />
+            </Principal>
+            <Dependent Role="billDetails">
+              <PropertyRef Name="tourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__bills__customerI__25869641">
+          <End Role="customer" Type="Self.customer" Multiplicity="0..1" />
+          <End Role="bills" Type="Self.bill" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="customer">
+              <PropertyRef Name="customerID" />
+            </Principal>
+            <Dependent Role="bills">
+              <PropertyRef Name="customerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__descripti__tourI__1CF15040">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="descriptionTour" Type="Self.descriptionTour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourID" />
+            </Principal>
+            <Dependent Role="descriptionTour">
+              <PropertyRef Name="tourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__vacation__provin__173876EA">
+          <End Role="province" Type="Self.province" Multiplicity="0..1" />
+          <End Role="vacation" Type="Self.vacation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="province">
+              <PropertyRef Name="provinceID" />
+            </Principal>
+            <Dependent Role="vacation">
+              <PropertyRef Name="provinceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tour__vacationID__1A14E395">
+          <End Role="vacation" Type="Self.vacation" Multiplicity="0..1" />
+          <End Role="tour" Type="Self.tour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vacation">
+              <PropertyRef Name="vacationID" />
+            </Principal>
+            <Dependent Role="tour">
+              <PropertyRef Name="vacationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourDetai__tourI__22AA2996">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="tourDetails" Type="Self.tourDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourID" />
+            </Principal>
+            <Dependent Role="tourDetails">
+              <PropertyRef Name="tourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tourImg__tourID__1FCDBCEB">
+          <End Role="tour" Type="Self.tour" Multiplicity="0..1" />
+          <End Role="tourImg" Type="Self.tourImg" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tour">
+              <PropertyRef Name="tourID" />
+            </Principal>
+            <Dependent Role="tourImg">
+              <PropertyRef Name="tourID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="projectASP01Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.account" />
+          <EntitySet Name="billDetails" EntityType="Self.billDetail" />
+          <EntitySet Name="bills" EntityType="Self.bill" />
+          <EntitySet Name="customers" EntityType="Self.customer" />
+          <EntitySet Name="descriptionTours" EntityType="Self.descriptionTour" />
+          <EntitySet Name="provinces" EntityType="Self.province" />
+          <EntitySet Name="tours" EntityType="Self.tour" />
+          <EntitySet Name="tourDetails" EntityType="Self.tourDetail" />
+          <EntitySet Name="tourImgs" EntityType="Self.tourImg" />
+          <EntitySet Name="vacations" EntityType="Self.vacation" />
+          <AssociationSet Name="FK__billDetai__idBil__286302EC" Association="Self.FK__billDetai__idBil__286302EC">
+            <End Role="bills" EntitySet="bills" />
+            <End Role="billDetails" EntitySet="billDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__billDetai__tourI__29572725" Association="Self.FK__billDetai__tourI__29572725">
+            <End Role="tour" EntitySet="tours" />
+            <End Role="billDetails" EntitySet="billDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__bills__customerI__25869641" Association="Self.FK__bills__customerI__25869641">
+            <End Role="customer" EntitySet="customers" />
+            <End Role="bills" EntitySet="bills" />
+          </AssociationSet>
+          <AssociationSet Name="FK__descripti__tourI__1CF15040" Association="Self.FK__descripti__tourI__1CF15040">
+            <End Role="tour" EntitySet="tours" />
+            <End Role="descriptionTour" EntitySet="descriptionTours" />
+          </AssociationSet>
+          <AssociationSet Name="FK__vacation__provin__173876EA" Association="Self.FK__vacation__provin__173876EA">
+            <End Role="province" EntitySet="provinces" />
+            <End Role="vacation" EntitySet="vacations" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tour__vacationID__1A14E395" Association="Self.FK__tour__vacationID__1A14E395">
+            <End Role="vacation" EntitySet="vacations" />
+            <End Role="tour" EntitySet="tours" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourDetai__tourI__22AA2996" Association="Self.FK__tourDetai__tourI__22AA2996">
+            <End Role="tour" EntitySet="tours" />
+            <End Role="tourDetails" EntitySet="tourDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tourImg__tourID__1FCDBCEB" Association="Self.FK__tourImg__tourID__1FCDBCEB">
+            <End Role="tour" EntitySet="tours" />
+            <End Role="tourImg" EntitySet="tourImgs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="projectASP01ModelStoreContainer" CdmEntityContainer="projectASP01Entities">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="projectASP01Model.account">
+              <MappingFragment StoreEntitySet="account">
+                <ScalarProperty Name="accountID" ColumnName="accountID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="billDetails">
+            <EntityTypeMapping TypeName="projectASP01Model.billDetail">
+              <MappingFragment StoreEntitySet="billDetails">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idBill" ColumnName="idBill" />
+                <ScalarProperty Name="tourID" ColumnName="tourID" />
+                <ScalarProperty Name="pay" ColumnName="pay" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="finish" ColumnName="finish" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bills">
+            <EntityTypeMapping TypeName="projectASP01Model.bill">
+              <MappingFragment StoreEntitySet="bills">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="amountOfPeople" ColumnName="amountOfPeople" />
+                <ScalarProperty Name="child" ColumnName="child" />
+                <ScalarProperty Name="payment" ColumnName="payment" />
+                <ScalarProperty Name="paystatus" ColumnName="paystatus" />
+                <ScalarProperty Name="confirm" ColumnName="confirm" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="customers">
+            <EntityTypeMapping TypeName="projectASP01Model.customer">
+              <MappingFragment StoreEntitySet="customer">
+                <ScalarProperty Name="customerID" ColumnName="customerID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+                <ScalarProperty Name="created_at" ColumnName="created_at" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="descriptionTours">
+            <EntityTypeMapping TypeName="projectASP01Model.descriptionTour">
+              <MappingFragment StoreEntitySet="descriptionTour">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tourID" ColumnName="tourID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="content" ColumnName="content" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="provinces">
+            <EntityTypeMapping TypeName="projectASP01Model.province">
+              <MappingFragment StoreEntitySet="province">
+                <ScalarProperty Name="provinceID" ColumnName="provinceID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tours">
+            <EntityTypeMapping TypeName="projectASP01Model.tour">
+              <MappingFragment StoreEntitySet="tour">
+                <ScalarProperty Name="tourID" ColumnName="tourID" />
+                <ScalarProperty Name="vacationID" ColumnName="vacationID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="start" ColumnName="start" />
+                <ScalarProperty Name="finish" ColumnName="finish" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="sales" ColumnName="sales" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tourDetails">
+            <EntityTypeMapping TypeName="projectASP01Model.tourDetail">
+              <MappingFragment StoreEntitySet="tourDetails">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tourID" ColumnName="tourID" />
+                <ScalarProperty Name="transport" ColumnName="transport" />
+                <ScalarProperty Name="hotel" ColumnName="hotel" />
+                <ScalarProperty Name="amountOfPeople" ColumnName="amountOfPeople" />
+                <ScalarProperty Name="childUnit" ColumnName="childUnit" />
+                <ScalarProperty Name="childAge" ColumnName="childAge" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tourImgs">
+            <EntityTypeMapping TypeName="projectASP01Model.tourImg">
+              <MappingFragment StoreEntitySet="tourImg">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="tourID" ColumnName="tourID" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="main" ColumnName="main" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vacations">
+            <EntityTypeMapping TypeName="projectASP01Model.vacation">
+              <MappingFragment StoreEntitySet="vacation">
+                <ScalarProperty Name="vacationID" ColumnName="vacationID" />
+                <ScalarProperty Name="provinceID" ColumnName="provinceID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

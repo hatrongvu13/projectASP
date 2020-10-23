@@ -1,0 +1,56 @@
+﻿@model Models.Entity.tourImg
+
+@{
+    ViewBag.Title = "UpLoad";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UpLoad</h2>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.link)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.main)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tour.name)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => Model.link)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.main)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => Model.tour.name)
+        </td>
+
+    </tr>
+
+</table>
+
+@using (Html.BeginForm("Upload", "tourImgs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div>
+        @Html.TextBox("file", "", new { type = "file" }) <br />
+        @Html.HiddenFor(modelItem => Model.id)
+        @Html.HiddenFor(modelItem => Model.link)
+        @Html.HiddenFor(modelItem => Model.main)
+        @Html.HiddenFor(modelItem => Model.tourID)
+
+        <input type="submit" value="Upload" />
+
+        @ViewBag.Message
+
+    </div>
+
+
+}
+

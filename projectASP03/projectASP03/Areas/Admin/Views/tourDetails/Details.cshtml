@@ -1,0 +1,67 @@
+﻿@model Models.Entity.tourDetail
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>tourDetail</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.transport)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.transport)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hotel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hotel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.amountOfPeople)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.amountOfPeople)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.childUnit)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.childUnit)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.childAge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.childAge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tour.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tour.name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

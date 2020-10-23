@@ -1,0 +1,39 @@
+﻿@model List<Models.Entity.tour>
+@if (Model != null)
+{
+    foreach (var item in Model)
+    {
+        var sale = item.unit - (item.unit * item.sales / 100);
+        <!-- HostSales Item -->
+        <div class="col-xs-6 col-md-3">
+            <div class="sales-item">
+                <figure class="home-sales-img">
+                    <a href="@Url.Action("Details","Tour", new { id=item.tourID })" title="">
+                        @*<img src="~/Content/UI/images/deal/@item.link" alt="">*@
+                        <img src="~/Content/photos/tour/@item.tourImgs.Last().link" alt="@item.name">
+                    </a>
+                    <figcaption>
+                        Save <span>@item.sales</span>%
+                    </figcaption>
+                </figure>
+                <div class="home-sales-text">
+                    <div class="home-sales-name-places">
+                        <div class="home-sales-name">
+                            <a href="#" title="">@item.name</a>
+                        </div>
+                        <div class="home-sales-places">
+                            <a href="#" title="">@item.vacation.name</a>,
+                            <a href="#" title="">@item.vacation.province.name</a>
+                        </div>
+                    </div>
+                    <hr class="hr">
+                    <div class="price-box">
+                        <span class="price old-price"><del>@item.unit VND</del></span>
+                        <span class="price special-price">@sale VND<small></small></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End HostSales Item -->
+    }
+}

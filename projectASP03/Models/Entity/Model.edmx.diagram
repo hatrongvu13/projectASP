@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="062ed0550db043da9cdbbd7aa56569fb" Name="Diagram1">
+        <EntityTypeShape EntityType="projectASP01Model.account" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.billDetail" Width="1.5" PointX="7.5" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.bill" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.customer" Width="1.5" PointX="3" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.descriptionTour" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.province" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.tour" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.tourDetail" Width="1.5" PointX="7.5" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.tourImg" Width="1.5" PointX="7.5" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="projectASP01Model.vacation" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <AssociationConnector Association="projectASP01Model.FK__billDetai__idBil__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="projectASP01Model.FK__billDetai__tourI__29572725" ManuallyRouted="false" />
+        <AssociationConnector Association="projectASP01Model.FK__bills__customerI__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="projectASP01Model.FK__descripti__tourI__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="projectASP01Model.FK__vacation__provin__173876EA" ManuallyRouted="false" />
+        <AssociationConnector Association="projectASP01Model.FK__tour__vacationID__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="projectASP01Model.FK__tourDetai__tourI__22AA2996" ManuallyRouted="false" />
+        <AssociationConnector Association="projectASP01Model.FK__tourImg__tourID__1FCDBCEB" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

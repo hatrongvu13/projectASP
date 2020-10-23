@@ -1,0 +1,146 @@
+﻿@using PagedList.Mvc
+@model PagedList.IPagedList<Models.Entity.tour>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+@{
+    Html.RenderPartial("_PartialHeader");
+}
+<!-- End Header -->
+<!--Banner-->
+<section class="sub-banner">
+    <!--Background-->
+    <div class="bg-parallax bg-1"></div>
+    <!--End Background-->
+    <!-- Logo -->
+    <div class="logo-banner text-center">
+        <a href="#" title="">
+            <img src="~/Content/UI/images/logo-banner.png" alt="">
+        </a>
+    </div>
+    <!-- Logo -->
+</section>
+<!--End Banner-->
+<!-- Main -->
+<div class="main">
+    <div class="container">
+        <div class="main-cn tour-page bg-white clearfix">
+            <div class="row">
+                <!-- Cruise Right -->
+                <div class="col-md-9 col-md-push-3">
+                    <section class="cruise-list">
+                        <!-- Sort by and View by -->
+                        <div class="sort-view clearfix">
+                            <!-- Sort by -->
+                            <div class="sort-by float-left">
+                                @*<label>Sắp xếp theo: </label>
+                                <div class="sort-select  float-left">
+                                    <span><a href="@Url.Action("Search", "Home", new { news = ViewBag.newsSort })">Tour mới</a></span>
+                                </div>
+                                <div class="sort-select float-left">
+                                    <span><a href="@Url.Action("Search", "Home", new { price = ViewBag.priceSort })">Pricing</a></span>
+                                </div>*@
+                            </div>
+                            <!-- End Sort by -->
+                        </div>
+                        <!-- End Sort by and View by -->
+                        <!-- Cruise Content -->
+                        <div class="cruise-list-cn tour-list-cn">
+                            @if (Model != null && Model.Count() > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        int sale = 0;
+
+                                        if(item.sales != 0) {
+                                            @sale = item.unit - (item.unit * item.sales / 100);
+                                        }
+                                        else
+                                        {
+                                            @sale = item.unit;
+                                        }
+                                    <!-- Item -->
+                                    <div class="cruise-item">
+                                        <figure class="cruise-img">
+                                            <a href="tour-detail.html">
+                                                <img src="~/Content/photos/tour/@item.tourImgs.Last().link" alt="@item.name">
+                                            </a>
+                                        </figure>
+                                        <div class="cruise-text">
+                                            <div class="cruise-name">
+                                                <a href="@Url.Action("Details","Tour", new { id=item.tourID })">European Contrasts plus Corfu</a>
+                                            </div>
+                                            <ul class="ship-port">
+                                                <li>
+                                                    <span class="label">Featuring:</span>
+                                                    France, Switzerland, Spain, Monaco, Italy, Vatican City, Austria, Germany, Czech Republic, Netherlands, Belgium (in transit)
+                                                </li>
+                                            </ul>
+                                            <div class="price-box">
+                                                <span class="price">
+                                                    From<br>
+                                                    <ins>@sale</ins>
+                                                </span>
+                                                <span class="price night">
+                                                    <ins>6</ins><small>/day</small>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End Item -->
+                                }
+                            }
+                            else
+                            {
+                                <div style="text-align:center"> Không có kết quả nào phù hợp !</div>
+                            }
+
+                        </div>
+                        <!-- End Cruise Content -->
+                        
+                        @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                    </section>
+                </div>
+                <!-- End Cruise Right -->
+                <!-- Sidebar Hotel -->
+                <div class="col-md-3 col-md-pull-9">
+                    <!-- Sidebar Content -->
+                    <div class="sidebar-cn">
+                        <!-- Search Result -->
+                        <div class="search-result">
+                            <p>
+                                We found <br>
+                                <ins>640</ins> <span>properties availability</span>
+                            </p>
+                        </div>
+                        <!-- End Search Result -->
+                        <!-- Search Form Sidebar -->
+                        <div class="search-sidebar">
+                            <div class="row">
+                                <div class="form-search clearfix">
+                                    <div class="form-field col-md-12">
+                                        <label for="region"><span>Region:</span> Wourldwide, Africa...</label>
+                                        <input type="text" name="region" id="region" value="" class="field-input">
+                                    </div>
+                                    <div class="form-submit col-md-12">
+                                        <button type="submit" class="awe-btn awe-btn-medium awe-search">Search</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Search Form Sidebar -->
+
+                    </div>
+                    <!-- End Sidebar Content -->
+                </div>
+                <!-- End Sidebar Hotel -->
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Main -->
+<!-- Footer --> 
